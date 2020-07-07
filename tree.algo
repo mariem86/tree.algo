@@ -1,0 +1,84 @@
+ node :	STRUCT
+          LC : ^node;
+         RC :^node ;
+                 END_STRUCT
+  // function give number of tree               
+FUNCTION count num node(node ^node) : ^node
+VAR
+ count: INTEGER;
+ 
+BEGIN
+    count=0
+    IF (node=null) THEN
+     count++
+     count= count+count num node(LC)
+     count= count+count num node(RC)
+    END_IF
+    RETURN count ;
+END
+// gives the height of a tree.
+FUNCTION findheight(node: ^node: ):^node  
+VAR
+ hleft, hrigth: INTEGER;
+ max: INTEGER;
+ BEGIN
+// Vérifier si l'arbre est vide 
+IF (node= null) THEN
+    Write("teer is empty")
+    RETURN 0;
+ELSE
+ hleft:=0
+ hrigth:=0
+ // Calcul de la hauteur du sous-arbre gauche  
+        IF(LC<> null) THEN
+        hleft = findheight (LC);  
+        // Calcul de la hauteur du sous-arbre droit  
+        if (RC<> null)  
+            hrigth = findheight (RC );   
+          END_IF
+ // Calculez la hauteur totale de l'arbre en ajoutant la hauteur de la racine  
+      RETURN(max+1)  ;
+ END
+ //Function to get the count of leaf nodes in tree
+ FUNCTION leafcount(node: ^node) : ^node
+ VAR
+     
+ BEGIN
+    if(node= node)THEN
+    RETURN 0;
+    IF (LC= null && RC= null) THEN
+        RETURN 1
+    ELSE
+        RETURN leafcount(LC) +leafcount(RC)
+    END_IF
+ END
+ //function  find max of tree
+ FUNCTION findMax(node: ^node) : ^node
+ VAR
+ res,res1,res2: INTEGER;
+ BEGIN
+     res = node.data;
+     res1 = findMax(LC);
+     res2 = findMax(RC);
+     IF (res1>res) THEN
+         res= res1
+      ELSE (res2>res)THEN
+         res= res2
+     END_IF
+     RETURN res ;
+END
+ //this function checks if a binary tree is full or not
+    function isFullTree(node: ^node) : ^node
+BEGIN
+        // if empty tree 
+        if(node == null) 
+        return true; 
+           
+        if(LC = null && RC = null ) 
+        RETURN true; 
+           
+        if((LC<>null)& (RC<>null)) 
+            return (isFullTree(LC) && isFullTree(RC)); 
+           
+        return false; 
+END
